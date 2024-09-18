@@ -11,7 +11,7 @@ class RunBatchCommand extends Command
                             {recipe? : The name of the recipe to run}
                             {--dry : Show commands without executing them}
                             {--no-stop : Continue execution even if a command fails}
-                            {--verbose : Show detailed output}
+                            {--show-output : Show detailed output for each command}
                             {--json : Output results in JSON format}';
 
     protected $description = 'Run a predefined batch of artisan commands';
@@ -63,7 +63,7 @@ class RunBatchCommand extends Command
         if (!$this->option('json')) {
             $this->info("🚀 Running batch '{$recipe}'...\n");
             $this->info("Configuration: " . ($dryRun ? "DRY RUN" : "EXECUTE") .
-                       " | Stop on failure: " . ($stopOnFailure ? "YES" : "NO"));
+                " | Stop on failure: " . ($stopOnFailure ? "YES" : "NO"));
             $this->line(str_repeat('=', 60));
         }
 
@@ -100,7 +100,7 @@ class RunBatchCommand extends Command
             $commandResult['status'] = $exit === 0 ? 'success' : 'failed';
 
             if (!$this->option('json')) {
-                if ($this->option('verbose') || $exit !== 0) {
+                if ($this->option('show-output') || $exit !== 0) {
                     $this->comment("Output: " . trim($output));
                 }
                 $this->comment("Time: {$executionTime}ms | Exit: {$exit}");
@@ -137,8 +137,8 @@ class RunBatchCommand extends Command
             $this->line(str_repeat('=', 60));
             $this->info("✅ Batch '{$recipe}' completed successfully!");
             $this->comment("Summary: {$results['summary']['successful']} successful, " .
-                          "{$results['summary']['failed']} failed, " .
-                          "{$results['summary']['skipped']} skipped");
+                "{$results['summary']['failed']} failed, " .
+                "{$results['summary']['skipped']} skipped");
         }
 
         $this->outputResults($results);
