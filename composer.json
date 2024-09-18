@@ -1,0 +1,37 @@
+{
+  "name": "plusinfolab/artisan-batch",
+  "description": "Run multiple artisan commands in defined batches or recipes.",
+  "type": "library",
+  "license": "MIT",
+  "keywords": [
+    "plusinfolab",
+    "laravel",
+    "artisan"
+  ],
+  "authors": [
+    {
+      "name": ":author_name",
+      "email": "author@domain.com",
+      "role": "Developer"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "PlusInfoLab\\ArtisanBatch\\": "src/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "PlusInfoLab\\ArtisanBatch\\ArtisanBatchServiceProvider"
+      ]
+    }
+  },
+  "require": {
+    "php": ">=8.1",
+    "illuminate/console": "^10.0|^11.0|^12.0",
+    "illuminate/support": "^10.0|^11.0|^12.0"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
